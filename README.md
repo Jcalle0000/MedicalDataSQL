@@ -18,7 +18,11 @@ https://dba.stackexchange.com/questions/241082/macos-docker-cannot-bulk-load-the
 Checking your docker container and checking which one is running
 docker container ls
   my docker container was: 85e987ffbc87
+  
+<img src="dockerContainer.png">
 
 Checking your docker containers file 
 docker exec -t -i mycontainer /bin/bash
+
+<img src="filesInContainer.png">
 
