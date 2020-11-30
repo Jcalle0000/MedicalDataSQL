@@ -54,4 +54,22 @@ GO
 
 select *FROM INPUT_DATA
 
+
+select distinct county from INPUT_DATA -- results in 1662
+select distinct zipcode from INPUT_DATA -- results in 8662
+
+select distinct zipcode, county from INPUT_DATA -- results in 8662
+
 select *FROM INPUT_DATA WHERE customer_id='C412403'
+select distinct city from INPUT_DATA -- 6085 cities
+
+
+select *from state_city -- 7689 rows
+ 
+select county,   COUNT(*) from INPUT_DATA 
+    GROUP BY county, zipcode HAVING COUNT(*)>1
+
+-- results in 1206 rows that have more than duplicate 
+
+
+select * from INPUT_DATA where zipcode='29684'
