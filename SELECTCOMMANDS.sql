@@ -1,0 +1,4 @@
+-- Select Commands
+
+SELECT *From CUSTOMER_INFO
+SELECT *From CUSTOMER_ADDRESS

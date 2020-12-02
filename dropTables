@@ -4,7 +4,6 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[STATE
 DROP TABLE [dbo].[STATE_CITY]
 GO
 
--- zipcode county
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ZIPCODE_COUNTY]') AND type in (N'U'))
-DROP TABLE [dbo].[ZIPCODE_COUNTY]
-GO
+DELETE FROM ZIPCODE_CITY_COUNTY_POPULATION
+
+-- Delete all data

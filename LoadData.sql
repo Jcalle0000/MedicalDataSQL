@@ -57,8 +57,14 @@ select *FROM INPUT_DATA
 
 select distinct county from INPUT_DATA -- results in 1662
 select distinct zipcode from INPUT_DATA -- results in 8662
+select DISTINCT cstmr_state from INPUT_DATA -- 52 states
 
 select distinct zipcode, county from INPUT_DATA -- results in 8662
+select distinct zipcode, city, cstmr_state, county from INPUT_DATA --8662
+select distinct zipcode, city, cstmr_state, county from INPUT_DATA --8662
+select distinct zipcode, customer_id  FROM INPUT_DATA
+
+select distinct state_population from INPUT_DATA -- results in 8662
 
 select *FROM INPUT_DATA WHERE customer_id='C412403'
 select distinct city from INPUT_DATA -- 6085 cities

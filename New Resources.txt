@@ -1,2 +1,6 @@
 -- RESOURCES
 Finding duplicate resoures
+
+
+-- git pull origin master after added the readme and pictures 
+-- through online github
