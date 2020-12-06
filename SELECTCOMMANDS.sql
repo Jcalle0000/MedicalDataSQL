@@ -90,7 +90,7 @@ set @HighBloodCount = (SELECT count(*) -- as 'highBloodCount'
         a.age>65 AND a.customer_id=b.customer_id AND b.highBlood='yes' 
     GROUP BY b.highBlood)
 
-PRINT 'HighBlood Count ' + CAST(@HighBloodCount as VARCHAR) 
+-- PRINT 'HighBlood Count ' + CAST(@HighBloodCount as VARCHAR) 
 -- Overweight 
 DECLARE @OverweightCount AS INT 
 set @OverweightCount = (SELECT count(*) -- as 'OverweightCount'
@@ -99,7 +99,7 @@ set @OverweightCount = (SELECT count(*) -- as 'OverweightCount'
         a.age>=65 AND a.customer_id=b.customer_id AND b.overweight='yes' 
     GROUP BY b.overweight)
 
-PRINT 'Overweight Count ' + CAST(@OverweightCount as VARCHAR) 
+-- PRINT 'Overweight Count ' + CAST(@OverweightCount as VARCHAR) 
 -- Stroke
 DECLARE @StrokeCount AS INT 
 set @StrokeCount = (
@@ -109,7 +109,7 @@ set @StrokeCount = (
         a.age>=65 AND a.customer_id=b.customer_id AND b.stroke='yes' 
     GROUP BY b.stroke)
 
-PRINT 'Stroke Count ' + CAST(@StrokeCount as VARCHAR) 
+-- PRINT 'Stroke Count ' + CAST(@StrokeCount as VARCHAR) 
 -- Hyperlipidemia
 DECLARE @HyperlipidemiaCount AS INT 
 set @HyperlipidemiaCount = (
@@ -119,7 +119,16 @@ set @HyperlipidemiaCount = (
         a.age>=65 AND a.customer_id=b.customer_id AND b.hyperlipidemia='yes' 
     GROUP BY b.hyperlipidemia)
 
-PRINT 'Hyperlipidemia Count ' + CAST(@HyperlipidemiaCount as VARCHAR) 
+-- PRINT 'Hyperlipidemia Count ' + CAST(@HyperlipidemiaCount as VARCHAR) 
+
+-- if( @HighBloodCount>@OverweightCount )
+if( @OverweightCount>@HighBloodCount)
+BEGIN 
+    PRINT @OverweightCount--@HyperlipidemiaCount
+END
+else IF
+    
+ELSE print 'n'
 
 DECLARE @temp TABLE (a INTEGER)
 INSERT INTO @temp VALUES(@HighBloodCount)
@@ -216,10 +225,20 @@ WHERE  customer_id IN(
         
         -- return the one with the highest 
         (
-            SELECT  a.customer_id --, a.age, b.highblood, 
-                -- b.overweight, b.stroke,  b.hyperlipidemia
-            FROM CUSTOMER_INFO a, CARDIAC_PATIENTS b
-            WHERE a.age>65 AND a.customer_id=b.customer_id AND b.highBlood='yes' 
+            -- HighBlood List
+            Declare @HighBloodCount AS INT
+            set @HighBloodCount = (
+                select count(*) FROM CUSTOMER_INFO a, CARDIAC_PATIENTS b
+                WHERE a.age>65 AND a.customer_id=b.customer_id AND b.highBlood='yes' 
+                GROUP BY b.highBlood
+            )
+
+            PRINT 'HighBlood Count ' + CAST(@HighBloodCount as VARCHAR) 
+            
+            -- SELECT  a.customer_id --, a.age, b.highblood, 
+            --     -- b.overweight, b.stroke,  b.hyperlipidemia
+            -- FROM CUSTOMER_INFO a, CARDIAC_PATIENTS b
+            -- WHERE a.age>65 AND a.customer_id=b.customer_id AND b.highBlood='yes' 
         )
 
         OR 
@@ -229,3 +248,5 @@ WHERE  customer_id IN(
         FROM CUSTOMER_INFO a, CARDIAC_PATIENTS b
         WHERE a.age>65 AND a.customer_id=b.customer_id AND b.overweight='yes' AND b.overweight='yes')
     )
+
+I
