@@ -219,34 +219,90 @@ WHERE  customer_id IN(
         WHERE a.age>65 AND a.customer_id=b.customer_id AND b.highBlood='yes' 
     )
 
-Select customer_id
-FROM CARDIAC_PATIENTS 
-WHERE  customer_id IN(
-        
-        -- return the one with the highest 
-        (
-            -- HighBlood List
-            Declare @HighBloodCount AS INT
-            set @HighBloodCount = (
-                select count(*) FROM CUSTOMER_INFO a, CARDIAC_PATIENTS b
-                WHERE a.age>65 AND a.customer_id=b.customer_id AND b.highBlood='yes' 
-                GROUP BY b.highBlood
-            )
 
-            PRINT 'HighBlood Count ' + CAST(@HighBloodCount as VARCHAR) 
-            
-            -- SELECT  a.customer_id --, a.age, b.highblood, 
-            --     -- b.overweight, b.stroke,  b.hyperlipidemia
-            -- FROM CUSTOMER_INFO a, CARDIAC_PATIENTS b
-            -- WHERE a.age>65 AND a.customer_id=b.customer_id AND b.highBlood='yes' 
-        )
 
-        OR 
-        (SELECT  a.customer_id --, a.age, b.highblood, 
-                -- b.overweight, b.stroke,  b.hyperlipidemia
-        
-        FROM CUSTOMER_INFO a, CARDIAC_PATIENTS b
-        WHERE a.age>65 AND a.customer_id=b.customer_id AND b.overweight='yes' AND b.overweight='yes')
-    )
+SELECT COUNT(*) FROM CUSTOMER_INFO 
+        WHERE age>65 AND asthma='yes'
 
-I
+-- numbers change slightly as an equal sign is needed
+
+countFunction 'highBlood' -- 1443
+countFunction 'stroke' -- 658
+countFunction 'complication_risk' -- 0
+countFunction 'overweight' -- 2235
+countFunction 'arthritis' --1246
+countFunction 'diabetes' -- 903
+countFunction 'hyperlipidemia' -- 1083
+countFunction 'backpain' -- 1374
+countFunction 'anxiety' -- 1065
+countFunction 'allergic_rhinitis' --1340
+countFunction 'reflux_esophagitis' -- 1365
+countFunction 'asthma' -- 0
+
+
+
+
+DECLARE @tempCount as INT
+DECLARE @Name as VARCHAR(100)                        -- name of nth column
+SET @Name= 'highblood'
+EXEC @tempCount= countFunction @Name -- this does not print
+Print 'Count is  ' + cast  (@tempCount as VARCHAR)
+-- Output parameters
+-- https://www.sqlservertutorial.net/sql-server-stored-procedures/stored-procedure-output-parameters/
+
+-- declare @S nvarchar(max) = 'select @x = 1'
+-- declare @xx int
+-- set @xx = 0
+-- exec sp_executesql @S, N'@x int out', @xx out
+-- select @xx
+
+DECLARE @DiseaseInput VARCHAR(50)
+SET @DiseaseInput='highblood'
+declare @S nvarchar(max) = 'SELECT count(*) FROM CUSTOMER_INFO '
+    + 'WHERE age>=65 AND ' + @DiseaseInput +'=' + ' ''yes''  '
+
+declare @xx int
+set @xx = 0
+exec sp_executesql @S, N'@x int out', @xx out
+select @xx
+print 'count is '+ CAST( @xx as varchar)
+
+-- create procedure Out_test1 (@inValue int, @OutValue int output)  
+-- as   
+-- begin  
+--     set @OutValue = @InValue  
+-- end  
+Declare @var5 INT
+set @var5= 5
+Declare @var6 INT
+EXEC Out_test1 @var5, @OutValue = @var6 OUTPUT
+PRINT @var6
+  
+
+-- -- this works (start)
+-- DECLARE @sqlCommand nvarchar(1000)
+-- DECLARE @city varchar(75)
+-- declare @counts int
+-- DECLARE @disease varchar(50)
+-- set @disease='highblood'
+-- SET @city = '65'
+--                                                                     -- this is 65
+-- SET @sqlCommand = 'SELECT @cnt=COUNT(*) FROM customer_INFO WHERE age > @city AND '+ @disease + ' ='+ '''yes'' '
+-- -- print @sqlCommand
+-- EXECUTE sp_executesql @sqlCommand, N'@disease nvarchar(50),@city nvarchar(75),@cnt int OUTPUT ', @disease=@disease  ,@city = @city, @cnt=@counts OUTPUT
+-- -- select @counts as Counts
+-- print @counts
+-- -- this works (end)
+
+-- now we want to see why it works 
+DECLARE @sqlCommand nvarchar(1000)
+declare @counts int
+DECLARE @disease varchar(50)
+set @disease='highblood'
+                                                                    -- this is 65
+SET @sqlCommand = 'SELECT @cnt=COUNT(*) FROM customer_INFO WHERE age > 65 AND '+ @disease + ' ='+ '''yes'' '
+-- print @sqlCommand
+EXECUTE sp_executesql @sqlCommand, N'@disease nvarchar(50),@cnt int OUTPUT ', @disease=@disease, @cnt=@counts OUTPUT
+
+-- select @counts as Counts
+print @counts
