@@ -11,6 +11,14 @@
 --     EXEC(@query)
 -- END
 
+-- -- Demonstration of CountFunction
+-- EXEC countFunction 'Arthritis' -- this returns a count
+-- EXEC countFunction 'highblood'
+-- DECLARE @tempCount  INT
+-- EXEC @tempCount= countFunction 'Arthritis' -- saving the return value to a local variable
+-- print ' the count is  '+ CAST( @tempCount as VARCHAR ) -- print 0
+
+-- THIS WORKS (STORED PROCEDURE THAT RETURNS VALUE - START) 2nd iteration
 CREATE PROCEDURE countFunction2 (@DiseaseInput VARCHAR(50), @DiseaseCount INT OUTPUT )
 AS -- do we need an alias?
 BEGIN
@@ -20,7 +28,7 @@ BEGIN
     -- DECLARE @disease varchar(50)
     -- set @disease='highblood'
                                                                         -- this is 65
-    SET @sqlCommand = 'SELECT @DiseaseCount=COUNT(*) FROM customer_INFO WHERE age > 65 AND '+ @DiseaseInput + ' ='+ '''yes'' '
+    SET @sqlCommand = 'SELECT @DiseaseCount=COUNT(*) FROM customer_INFO WHERE age >= 65 AND '+ @DiseaseInput + ' ='+ '''yes'' '
     -- print @sqlCommand
     EXECUTE sp_executesql @sqlCommand, N'@DiseaseInput nvarchar(50), @DiseaseCount int OUTPUT ', @DiseaseInput=@DiseaseInput, @DiseaseCount=@DiseaseCount OUTPUT
 
@@ -33,42 +41,10 @@ set @var11 = 'highBlood'
 DECLARE @var12  INT
 EXEC countFunction2 @var11, @DiseaseCount=@var12 OUTPUT
 PRINT @VAR12
-
--- -- DECLARE @DiseaseInput VARCHAR(50)
---     -- SET @DiseaseInput='highblood'
---     declare @S nvarchar(max) = 'SELECT count(*) AS diseaseCOUNT FROM CUSTOMER_INFO  '
---         + 'WHERE age>=65 AND ' + @DiseaseInput +'=' + ' ''yes''  '
---     declare @xx int
---     set @xx = 0
---      exec sp_executesql @S, N'@x int out', @xx out
---     -- select @xx
---     -- print 'count is '+ CAST( @xx as varchar)
-
-declare @var1 VARCHAR(50)
-declare @var2 int
-set @var1='Arthritis'
-EXEC countFunction2 @var1 , @DiseaseCount= @var2 output
-print @var2
-PRINT @DiseaseCount
-DECLARE @var3 int
-EXEC @var3 = countFunction2 @var1, @xx= @var2 OUTPUT
-print @var2
--- set @var3 = (select @var2)
-print 'ans is ' + ISNULL(  CAST( @var3 as VARCHAR), '(null)')-- +CAST( @var3 as VARCHAR)
-go
-
-select customer_id  from customer_info
-WHERE age>=65 AND highblood='yes'
+-- THIS WORKS (STORED PROCEDURE THAT RETURNS VALUE - END)
 
 
--- Demonstration of CountFunction
-EXEC countFunction 'Arthritis' -- this returns a count
-EXEC countFunction 'highblood'
-DECLARE @tempCount  INT
-EXEC @tempCount= countFunction 'Arthritis' -- saving the return value to a local variable
-print ' the count is  '+ CAST( @tempCount as VARCHAR ) -- print 0
-
--- PROTOTYPE for 2nd procedure
+-- PROTOTYPE for 3nd procedure
 print(CHAR(13))
 -- PRINT ('Most Common Disease In Senior Citizens 65 and up')
 DECLARE @MaxColumns AS INT                                    -- amount of columns  
@@ -79,27 +55,32 @@ SET @Counter=8                                             -- starting from 8th 
 Declare @TableName as VARCHAR(100)                         -- table name
 SET @TableName = 'CUSTOMER_INFO'
 DECLARE @NthColumn AS INT
-DECLARE @Name as VARCHAR(100)                        -- name of nth column
+DECLARE @Name as VARCHAR(100)                              -- name of nth column
 DECLARE @tempCount as INT
 DECLARE @MaxCount as int
 set @MaxCount = 0
-PRINT CAST( @MaxCount as VARCHAR)
 WHILE ( @Counter <= @MaxColumns)
     BEGIN
+                                        -- starting from the 8th column
         SELECT @TableName = N'CUSTOMER_INFO', @NthColumn=@Counter
-                            -- counter is being update and updates the Nth column
         SET @Name= ( SELECT COL_NAME( OBJECT_ID(@TableName),@NthColumn ) ColumnName)
         -- EXEC countFunction 'Arthritis'
-        EXEC @tempCount= countFunction @Name -- this does not print
+        -- EXEC @tempCount= countFunction @Name -- this does not print
+        EXEC countFunction2 @Name, @DiseaseCount=@tempCount OUTPUT
         print @Name + ' count ' + CAST(@tempCount AS VARCHAR)
         SET @Counter  = @Counter  + 1
-        -- if(@tempCount > @MaxCount)
-        --     BEGIN
-        --     set @MaxCount = @tempCount
-        --     PRINT 'MaxCount' + CAST( @MaxCount as VARCHAR)
-        --     END
+        if(@tempCount > @MaxCount)
+            BEGIN
+                set @MaxCount = @tempCount
+                -- basically we print whenever we find a new max number
+                -- PRINT 'New MaxCount is ' + CAST( @MaxCount as VARCHAR)
+                -- print ''
+            END
     END
+print ''
+PRINT 'MaxCount is ' + CAST( @MaxCount as VARCHAR)
 print(CHAR(13)); print(CHAR(13))
+
 
 -- Grabbing the name of the column
 -- https://social.msdn.microsoft.com/Forums/sqlserver/en-US/bbae3471-6694-4502-b27c-33db18c5dc1b/get-nth-column-in-a-table?forum=transactsql
