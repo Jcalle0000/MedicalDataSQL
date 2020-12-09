@@ -19,6 +19,7 @@
 -- print ' the count is  '+ CAST( @tempCount as VARCHAR ) -- print 0
 
 -- THIS WORKS (STORED PROCEDURE THAT RETURNS VALUE - START) 2nd iteration
+-- this should be seniorCitizenDiseaseCount
 CREATE PROCEDURE countFunction2 (@DiseaseInput VARCHAR(50), @DiseaseCount INT OUTPUT )
 AS -- do we need an alias?
 BEGIN
@@ -49,42 +50,4 @@ PRINT @VAR12
 
 -- Grabbing the name of the column
 -- https://social.msdn.microsoft.com/Forums/sqlserver/en-US/bbae3471-6694-4502-b27c-33db18c5dc1b/get-nth-column-in-a-table?forum=transactsql
-
--- what i want to do (start)
-DECLARE @Name as VARCHAR(100)  
-set @Name='Arthritis'
-EXEC countFunction @Name
-DECLARE @tempCount as INT
-SET @tempCount = EXEC countFunction @Name
--- what i want to do (end)
-
-SELECT COLUMN_NAME AS columns
-FROM INFORMATION_SCHEMA.COLUMNS 
-    WHERE TABLE_NAME ='customer_info'
-
--- Starting at the nth column
-DECLARE @TableName as nVarchar(100);
-DECLARE @NthColumn as Int
-
---we are fetching 1st column here.
-
-SELECT 
-@TableName =N'CUSTOMER_INFO',
-@NthColumn=4 --Change if necessary
-
-DECLARE @ColumnName as varchar(100);
-SELECT @ColumnName = Col_name(object_id(@TableName),@NthColumn); 
-
-EXEC ('SELECT ' + @ColumnName + ' FROM ' + @TableName);
-
- create proc myproc
- as 
- begin
-     return 1
- end
-
- go
- declare @i int
- exec @i = myproc
-print @i
 
