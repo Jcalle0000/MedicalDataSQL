@@ -19,7 +19,7 @@ BEGIN
     DECLARE @MinCount as int
     set @MinCount = 1000000000 -- largest number i could before overflow
     WHILE ( @Counter <= @MaxColumns)
-        BEGIN
+    BEGIN
                                             -- starting from the 9th column
             SELECT @TableName = N'CUSTOMER_INFO', @NthColumn=@Counter
             -- PRINT 'TableName is '+@TableName -- just to see what this is
@@ -36,11 +36,9 @@ BEGIN
     PRINT ''
     PRINT CAST(@MinName as VARCHAR) + ' is the least common disease in women with a count of ' + CAST( @MinCount as VARCHAR)
     PRINT ''
-    -- Continue here, work on returning these customers             -- dosent recognize @minName
-    select customer_id, age from CUSTOMER_INFO where gender='female' and @MinName='yes' 
-    -- EXEC 
+    EXEC returnFemaleCustomers @MinName
 END
+-- example
+-- exec womenLeastCommonDisease
 
-exec womenLeastCommonDisease
-
-select customer_id, age from CUSTOMER_INFO where gender='female' and stroke='yes' 
+-- select customer_id, age from CUSTOMER_INFO where gender='female' and stroke='yes' 
