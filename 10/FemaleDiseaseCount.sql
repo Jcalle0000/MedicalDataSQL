@@ -30,7 +30,7 @@ BEGIN
 END -- END OF PROCEDURE
 
 DECLARE @Out int
-EXECUTE FemaleDiseaseCount 'asthma', @DiseaseCount=@Out OUTPUT 
+EXECUTE FemaleDiseaseCount 'highblood', @DiseaseCount=@Out OUTPUT 
                             -- have to specify output or else it wont print
 print @Out
 

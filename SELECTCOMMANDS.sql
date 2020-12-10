@@ -121,45 +121,14 @@ set @HyperlipidemiaCount = (
 
 -- PRINT 'Hyperlipidemia Count ' + CAST(@HyperlipidemiaCount as VARCHAR) 
 
--- if( @HighBloodCount>@OverweightCount )
-if( @OverweightCount>@HighBloodCount)
-BEGIN 
-    PRINT @OverweightCount--@HyperlipidemiaCount
-END
-else IF
-    
-ELSE print 'n'
 
-DECLARE @temp TABLE (a INTEGER)
-INSERT INTO @temp VALUES(@HighBloodCount)
-INSERT INTO @temp VALUES(@OverweightCount) -- this the max
-INSERT INTO @temp VALUES(@StrokeCount)
-INSERT INTO @temp VALUES(@HyperlipidemiaCount)
+
 
 SELECT MAX(a) FROM @temp 
 
 select 
 
 
--- In table form
--- StrokeCount = 430
-SELECT b.stroke, count(*) as 'StrokeCount'
-FROM CUSTOMER_INFO a, CARDIAC_PATIENTS b
-WHERE
-    a.age>=65 AND a.customer_id=b.customer_id AND b.stroke='YES'
-GROUP BY b.stroke
-
-SELECT b.hyperlipidemia, count(*) as HyperlipidemiaCount
-FROM CUSTOMER_INFO a, CARDIAC_PATIENTS b
-WHERE
-    a.age>=65 AND a.customer_id=b.customer_id AND b.hyperlipidemia='YES'
-GROUP BY b.hyperlipidemia
-
-PRINT(HyperlipidemiaCount)
-
-SELECT COUNT(b.overweight) as OverweightCount 
-FROM CARDIAC_PATIENTS b
-WHERE overweight='yes'
 
 
 
@@ -294,15 +263,38 @@ PRINT @var6
 -- print @counts
 -- -- this works (end)
 
--- now we want to see why it works 
-DECLARE @sqlCommand nvarchar(1000)
-declare @counts int
-DECLARE @disease varchar(50)
-set @disease='highblood'
-                                                                    -- this is 65
-SET @sqlCommand = 'SELECT @cnt=COUNT(*) FROM customer_INFO WHERE age > 65 AND '+ @disease + ' ='+ '''yes'' '
--- print @sqlCommand
-EXECUTE sp_executesql @sqlCommand, N'@disease nvarchar(50),@cnt int OUTPUT ', @disease=@disease, @cnt=@counts OUTPUT
+select  distinct asthma from CUSTOMER_INFO where LEN(asthma)=4 -- returns yes
+select  distinct customer_id , asthma from CUSTOMER_INFO where LEN(asthma)=3 -- returns no
+select  distinct asthma from CUSTOMER_INFO where LEN(asthma)=2 -- returns no
+select   asthma from CUSTOMER_INFO where LEN(asthma)=4 -- returns 2893
 
--- select @counts as Counts
-print @counts
+select   asthma from CUSTOMER_INFO where LEN(asthma)=4 AND 
+    seniorCitizen='1023'
+-- returns 2893
+
+select stroke from CUSTOMER_INFO where
+stroke='yes'
+
+select   asthma from CUSTOMER_INFO where LEN(asthma)=3 -- returns 7106
+select   asthma from CUSTOMER_INFO where LEN(asthma)=2 -- returns 1
+print 2893+7106+1
+
+SELECT CUSTOMER_ID FROM CUSTOMER_INFO WHERE GENDER='FEMALE' AND highBlood='YES'
+
+DECLARE @DiseaseInput VARCHAR(50)
+SET @DiseaseInput='asthma'
+
+DECLARE @DiseaseCount INT 
+-- select customer_id, asthma from CUSTOMER_INFO where LEN(asthma)=4
+
+SELECT COUNT(*) FROM CUSTOMER_INFO 
+    WHERE AGE>=65 AND LEN(asthma)=4
+
+select distinct len(asthma) from CUSTOMER_INFO
+-- 2893
+select distinct asthma from CUSTOMER_INFO where LEN(asthma)=5
+
+select customer_id, complication_risk,  seniorCitizen, highBlood, stroke, overweight, arthritis ,diabetes, hyperlipidemia, backpain, anxiety, allergic_rhinitis, reflux_esophagitis, asthma
+from CUSTOMER_INFO where complication_risk='High'
+
+select customer_id, age FROM CUSTOMER_INFO where seniorCitizen='yes' and overweight='yes'

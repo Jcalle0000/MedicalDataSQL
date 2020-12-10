@@ -26,8 +26,10 @@ docker exec -t -i mycontainer /bin/bash
 
 <img src="filesInContainer.png">
 
+#Stored Procedures
+
 @Disease referes to the column name
-Stored Procedures
+
 1. countFunction2 @DiseaseInput @DiseaseCount
 Takes the name of the disease as an Input
 and then outputs the count of customers with that disease

@@ -20,7 +20,7 @@ CREATE TABLE INPUT_DATA(
     seniorCitizen       VARCHAR(50),
     highBlood           VARCHAR(50),        
     stroke              VARCHAR(50),
-    complication        VARCHAR(50),
+    complication        VARCHAR(50), -- lets move this 
     overweight          VARCHAR(50),
     arthritis           VARCHAR(50),
     diabetes            VARCHAR(50),
@@ -29,7 +29,7 @@ CREATE TABLE INPUT_DATA(
     anxiety	            VARCHAR(50),
     allergic_rhinitis	VARCHAR(50),
     reflux_esophagitis	VARCHAR(50),
-    asthma              VARCHAR(50)
+    asthma              VARCHAR(4)
 )
 go
 
@@ -37,7 +37,7 @@ go
 
 -- copy  input_Data2 FROM '/Med-data.csv'
 -- go
-
+select * from INPUT_DATA
 BULK INSERT INPUT_DATA 
     FROM '\Med-dataOG.csv' 
     -- UNC naming convention

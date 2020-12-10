@@ -10,7 +10,7 @@ BEGIN
     SET @MaxColumns = ( select COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS where TABLE_Name='CUSTOMER_INFO')
     PRINT('Columns Count '+  CAST(@MaxColumns as VARCHAR)  )     
     DECLARE @Counter INT 
-    SET @Counter=8                                             -- starting from 8th column
+    SET @Counter=9                                             -- starting from 8th column
     Declare @TableName as VARCHAR(100)                         -- table name
     SET @TableName = 'CUSTOMER_INFO'
     DECLARE @NthColumn AS INT
@@ -37,25 +37,15 @@ BEGIN
                     -- PRINT 'New MaxCount is ' + CAST( @MaxCount as VARCHAR)
                     -- print ''
                 END
-        END
+    END -- end of while loop too
+
     print ''
     -- PRINT 'MaxCount is ' + CAST( @MaxCount as VARCHAR) + ' for column name '+ CAST(@MaxName as VARCHAR)
     PRINT CAST(@MaxName as VARCHAR) + ' is the most common disease in senior citzens with a count of ' + CAST( @MaxCount as VARCHAR)
     print(CHAR(13) ); 
-    print(CHAR(13))
-    EXEC returnCustomers @MaxName
-END
+    EXEC returnCustomers @MaxName 
+END -- end of MostCommonDisease Procedure
 
 EXEC MostCommonDisease
-
--- CREATE TABLE #SeniorCitizensWithMostCommonDisease(
---     customer_idd INT
--- )
--- DECLARE @MaxName as VARCHAR(100)  
--- SET @MaxName = 'highblood'
--- select customer_id FROM CUSTOMER_INFO where seniorCitizen='yes' AND @MaxName='YES'
-
--- we need a procedure that returns the customer_id's
-
 
 
