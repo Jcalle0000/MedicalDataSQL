@@ -21,4 +21,4 @@ BEGIN
 END
 
 -- example
-EXECUTE returnCustomers11 'asthma'
+-- EXECUTE returnCustomers11 'asthma'

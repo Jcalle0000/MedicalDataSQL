@@ -46,6 +46,7 @@ BEGIN
     EXEC returnCustomers @MaxName 
 END -- end of MostCommonDisease Procedure
 
+-- to execute 
 EXEC MostCommonDisease
 
 

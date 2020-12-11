@@ -1,4 +1,3 @@
-
 CREATE DATABASE MEDICAL_INFO
 GO
 
@@ -33,11 +32,10 @@ CREATE TABLE INPUT_DATA(
 )
 go
 
--- LOAD DATA LOCAL infile
 
 -- copy  input_Data2 FROM '/Med-data.csv'
 -- go
-select * from INPUT_DATA
+-- select * from INPUT_DATA
 BULK INSERT INPUT_DATA 
     FROM '\Med-dataOG.csv' 
     -- UNC naming convention
@@ -52,30 +50,4 @@ BULK INSERT INPUT_DATA
     );
 GO   
 
-select *FROM INPUT_DATA
 
-
-select distinct county from INPUT_DATA -- results in 1662
-select distinct zipcode from INPUT_DATA -- results in 8662
-select DISTINCT cstmr_state from INPUT_DATA -- 52 states
-
-select distinct zipcode, county from INPUT_DATA -- results in 8662
-select distinct zipcode, city, cstmr_state, county from INPUT_DATA --8662
-select distinct zipcode, city, cstmr_state, county from INPUT_DATA --8662
-select distinct zipcode, customer_id  FROM INPUT_DATA
-
-select distinct state_population from INPUT_DATA -- results in 8662
-
-select *FROM INPUT_DATA WHERE customer_id='C412403'
-select distinct city from INPUT_DATA -- 6085 cities
-
-
-select *from state_city -- 7689 rows
- 
-select county,   COUNT(*) from INPUT_DATA 
-    GROUP BY county, zipcode HAVING COUNT(*)>1
-
--- results in 1206 rows that have more than duplicate 
-
-
-select * from INPUT_DATA where zipcode='29684'

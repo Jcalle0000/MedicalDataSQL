@@ -1,3 +1,4 @@
+-- part 10 - (2/3)
 -- return female customers with a certain disease
 CREATE PROCEDURE returnFemaleCustomers(@DiseaseInput VARCHAR(50) )
 AS 

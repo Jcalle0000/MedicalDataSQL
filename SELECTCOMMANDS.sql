@@ -298,3 +298,28 @@ select customer_id, complication_risk,  seniorCitizen, highBlood, stroke, overwe
 from CUSTOMER_INFO where complication_risk='High'
 
 select customer_id, age FROM CUSTOMER_INFO where seniorCitizen='yes' and overweight='yes'
+
+select distinct county from INPUT_DATA -- results in 1662
+select distinct zipcode from INPUT_DATA -- results in 8662
+select DISTINCT cstmr_state from INPUT_DATA -- 52 states
+
+select distinct zipcode, county from INPUT_DATA -- results in 8662
+select distinct zipcode, city, cstmr_state, county from INPUT_DATA --8662
+select distinct zipcode, city, cstmr_state, county from INPUT_DATA --8662
+select distinct zipcode, customer_id  FROM INPUT_DATA
+
+select distinct state_population from INPUT_DATA -- results in 8662
+
+select *FROM INPUT_DATA WHERE customer_id='C412403'
+select distinct city from INPUT_DATA -- 6085 cities
+
+
+select *from state_city -- 7689 rows
+ 
+select county,   COUNT(*) from INPUT_DATA 
+    GROUP BY county, zipcode HAVING COUNT(*)>1
+
+-- results in 1206 rows that have more than duplicate 
+
+
+select * from INPUT_DATA where zipcode='29684'

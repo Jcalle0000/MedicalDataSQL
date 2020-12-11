@@ -25,8 +25,6 @@ CREATE TABLE CUSTOMER_INFO
 )
 GO
 
-
-
 INSERT INTO CUSTOMER_INFO
     SELECT customer_id, employment, education
     , martial, gender,age , seniorCitizen, complication , highBlood, stroke
@@ -35,7 +33,7 @@ INSERT INTO CUSTOMER_INFO
         FROM INPUT_DATA
 GO
 
-select *FROM CUSTOMER_INFO
+-- select *FROM CUSTOMER_INFO
 -- 10,000 customers -> 10,000 rows
 
 -- TABLE 2
@@ -47,9 +45,7 @@ CREATE TABLE CUSTOMER_ADDRESS(
     zipcode_state       VARCHAR(2),               -- 52               
     zipcode_population    INT       ,             -- 6001
     area                VARCHAR(50),
-    
     customer_id         VARCHAR(20)   NOT NULL        ,
-
     -- PRIMARY KEY(zipcode),
     FOREIGN KEY(customer_id) REFERENCES CUSTOMER_INFO(customer_id),
     -- 1:N relation
@@ -61,7 +57,6 @@ CREATE TABLE CUSTOMER_ADDRESS(
     -- primary key makes the combination have to be unique
 )
 GO
-
 INSERT INTO CUSTOMER_ADDRESS
     -- these are the names from the INPUT_DATA
     SELECT zipcode, city, county, cstmr_state, state_population, 
@@ -92,3 +87,5 @@ INSERT INTO CARDIAC_PATIENTS
     FROM CUSTOMER_INFO where hyperlipidemia='YES' OR highBlood='YES'
 GO
 -- 6105 patients
+
+-- select *FROM CARDIAC_PATIENTS

@@ -4,3 +4,65 @@ Finding duplicate resoures
 
 -- git pull origin master after added the readme and pictures 
 -- through online github
+
+-- Grabbing the name of the column
+-- https://social.msdn.microsoft.com/Forums/sqlserver/en-US/bbae3471-6694-4502-b27c-33db18c5dc1b/get-nth-column-in-a-table?forum=transactsql
+
+	- was used for the count Function
+
+
+Files handing in
+
+1. LoadData - creating the database and uploading the data to a table 
+As it came in
+
+2. Create tables
+	- has the tables normalized and has the commands to insert the data
+	- holds cardiac patients table 
+
+3. Folder 9 - Generate a list of patients with customer_id ordered by age, showing 
+	      which is the most common disease amongst senior Citizens
+	
+	- CountFunction.sql (2nd iteration)
+	            - the yes value was not being recognized in the asthma column
+		    - so I had to make a special if statement for it
+		    - holds an example below
+		- main objective is to get the count for a disease
+		  which is found by grabbing the column's name as the diseaseInput
+		  and then returns an output value with the count
+	- returncustomers.sql 
+		-- this procedure is used to return the customers with the diseaseInput
+		-- this is mainly used in the MostCommon procedure
+		-- holds an example that is commented 
+	- mostCommonDieaseProcedure.sql
+		-- Uses countFunction.sql (Holds the procedure)
+		-- uses returnCustomers.sql (Holds the procedure)
+		-- Main algorithm that keeps track of the highestCount (@MaxCount) and
+		   the name of the disease as @MaxName, prints count for all diseases and
+		   outputs customers_id found as the most Common disease in senior citizens
+	
+	-- Run EXEC MostCommonDisease to show count of each disease and output of customers
+
+Folder 10 and 11 are very similar in structure as 9
+	except the conditions are slightly changed in each
+		
+
+4. Folder 10
+	- Holds FemaleDiseaseCount.sql, returnFemaleCustomers.sql, womenLeastCommonDisease.sql
+		(Helper)			(Helper)			(main )
+	- FemaleDiseaseCount.sql is used to find the count from customer_info
+	  with conditions of gender='female and takes the DiseaseInput
+	-returnFemaleCustomers.sql 
+	- womenLeastCommonDisease.sql (returns the female customers with the lowest count 
+		disease)
+
+
+4. Folder 11
+
+	MostCommonDiseaseFoundInAllCustomers11.sql 
+	- EXEC mostCommonDiseaseInAllCustomers11 (to test everything)
+
+4. Folder 12
+	patients12.sql
+	-- units all rows from different select statements and then outputs only the unique 
+	values

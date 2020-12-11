@@ -40,7 +40,7 @@ BEGIN
 END
 
 -- example
--- EXEC patients12
+EXEC patients12
 
 
 

@@ -29,4 +29,4 @@ BEGIN
     EXEC(@sqlCommand)
 END
 -- example
-EXEC returnCustomers 'highblood'
+-- EXEC returnCustomers 'highblood'

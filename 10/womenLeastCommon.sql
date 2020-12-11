@@ -1,4 +1,5 @@
 -- LeastCommonDisease in women
+-- 10 (3/3)
 CREATE PROCEDURE womenLeastCommonDisease
 AS 
 BEGIN
@@ -39,6 +40,5 @@ BEGIN
     EXEC returnFemaleCustomers @MinName
 END
 -- example
--- exec womenLeastCommonDisease
+exec womenLeastCommonDisease
 
--- select customer_id, age from CUSTOMER_INFO where gender='female' and stroke='yes' 

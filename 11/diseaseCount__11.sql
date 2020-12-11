@@ -1,5 +1,4 @@
--- showing most common disease among all customers
--- QUESTION 11 PART 1
+-- QUESTION 11 PART 1/3
 CREATE PROCEDURE diseaseCount11(@DiseaseInput VARCHAR(50), @DiseaseCount INT OUTPUT)
 AS
 BEGIN

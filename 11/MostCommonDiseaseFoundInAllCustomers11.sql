@@ -42,3 +42,6 @@ BEGIN
     print(CHAR(13) ); 
     EXEC returnCustomers11 @MaxName 
 END
+
+EXEC mostCommonDiseaseInAllCustomers11
+-- returns 7094 (overweight)
