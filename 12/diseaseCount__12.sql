@@ -44,7 +44,7 @@
     + ' AND '
     + @overWeightInput='YES  '
 
--- CASE 1 - all 5 diseases=yes
+-- CASE 1 - all 5 diseases=yes (113)
     select customer_id, age FROM CUSTOMER_INFO
     WHERE anxiety='yes' AND overweight='yes' AND reflux_esophagitis='yes' 
     AND allergic_rhinitis='yes' AND len(asthma)=4 ORDER by age
@@ -65,5 +65,15 @@ select customer_id, age FROM CUSTOMER_INFO
 select customer_id, age FROM CUSTOMER_INFO
     WHERE (anxiety='yes' AND overweight='yes'AND reflux_esophagitis='yes'
     AND len(asthma)=4) OR allergic_rhinitis='yes'
+
+select customer_id FROM CUSTOMER_INFO
+    where customer_id= 
+        ( select customer_id FROM CUSTOMER_INFO
+        WHERE (anxiety='yes' AND overweight='yes'AND reflux_esophagitis='yes'
+        AND len(asthma)=4) OR allergic_rhinitis='yes' )
+        OR
+        ( select customer_id, age FROM CUSTOMER_INFO
+        WHERE (anxiety='yes' AND overweight='yes'AND reflux_esophagitis='yes'
+        AND allergic_rhinitis='yes') OR len(asthma)=4  )
 
     
