@@ -1,5 +1,5 @@
 # MedicalDataSQL
-Normalized tables from an input file that has information about a customer's health data
+Normalized tables from an input file that had information about a customers health data
 
 Project Date (Started):November 27, 2020
 
