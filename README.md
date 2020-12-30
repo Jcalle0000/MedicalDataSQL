@@ -15,15 +15,15 @@ Tables: Customer_Info, Customer_address, cardiac patients
 
   1. countFunction2 @DiseaseInput @DiseaseCount
   Takes the name of the disease as an Input
-  and then outputs the count of customers with that disease
+  and then outputs the count of customers with that disease <br>
   2. returnCustomer @Disease
-  Executes a list of customers with a certain disease
-  3. MostCommonDisease
+  Executes a list of customers with a certain disease <br>
+  3. MostCommonDisease <br>
   a. uses CountFunction2 to iterate through the columns keeping 
-  track of the highestCount
+  track of the highestCount <br>
   b.  returning the list of customers
-   with the returnCustomer procedure.
-  c. Also prints out the disease with its count.
+   with the returnCustomer procedure. <br>
+  c. Also prints out the disease with its count. <br>
 
 Project Date (Started):November 27, 2020
 
