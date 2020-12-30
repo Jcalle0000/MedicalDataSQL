@@ -11,7 +11,7 @@ Tables: Customer_Info, Customer_address, cardiac patients
 
 #Stored Procedures
 
-  @Disease referes to the column name - Input Variable
+  @Disease referes to the column name - Input Variable <br>
   @DiseaseCount - Output variables
 
   1. countFunction2 @DiseaseInput @DiseaseCount
