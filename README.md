@@ -1,6 +1,12 @@
 # MedicalDataSQL
 Normalized tables from an input file that had information about a customers health data
 
+1. Identified all patients with High Blood pressure or Hyperlipidemia in the Cardiac Patients table
+2. Generated a list of patients who were found have the most common disease among senior citizens
+after using dynamic querying and creating stored procedures to find the most common disease (Folder 10)
+3. Process was done similarly for female patients for the least common disease (Folder 11)
+4. Generated a list of patients who have anxiety, and are overweight and have Reflux_esophagitis and/or Allergic_rhinitis and/or Asthma. (Folder 12)
+
 Project Date (Started):November 27, 2020
 
 Since im working on MAC and are working through docker
