@@ -1,11 +1,29 @@
 # MedicalDataSQL
-Normalized tables from an input file that had information about a customers health data
+Normalized data from an input file that had information about a customers health data resulting in three different tables with relations. 
+Tables: Customer_Info, Customer_address, cardiac patients 
 
 1. Identified all patients with High Blood pressure or Hyperlipidemia in the Cardiac Patients table
 2. Generated a list of patients who were found have the most common disease among senior citizens
-after using dynamic querying and creating stored procedures to find the most common disease (Folder 10)
-3. Process was done similarly for female patients for the least common disease (Folder 11)
-4. Generated a list of patients who have anxiety, and are overweight and have Reflux_esophagitis and/or Allergic_rhinitis and/or Asthma. (Folder 12)
+ using dynamic queries and stored procedures to find the most common disease (Folder 9)
+3. Process was done similarly for female patients for the least common disease (Folder 10)
+4. Most common disease was found among all patients through similar procedures (Folder 11)
+5. Generated a list of patients who have anxiety, and are overweight and have Reflux_esophagitis and/or Allergic_rhinitis and/or Asthma. (Folder 12)
+
+#Stored Procedures
+
+  @Disease referes to the column name
+
+  1. countFunction2 @DiseaseInput @DiseaseCount
+  Takes the name of the disease as an Input
+  and then outputs the count of customers with that disease
+  2. returnCustomer @Disease
+  Executes a list of customers with a certain disease
+  3. MostCommonDisease
+  a. uses CountFunction2 to iterate through the columns keeping 
+  track of the highestCount
+  b.  returning the list of customers
+   with the returnCustomer procedure.
+  c. Also prints out the disease with its count.
 
 Project Date (Started):November 27, 2020
 
@@ -32,18 +50,4 @@ docker exec -t -i mycontainer /bin/bash
 
 <img src="filesInContainer.png">
 
-#Stored Procedures
 
-@Disease referes to the column name
-
-1. countFunction2 @DiseaseInput @DiseaseCount
-Takes the name of the disease as an Input
-and then outputs the count of customers with that disease
-2. returnCustomer @Disease
-Executes a list of customers with a certain disease
-3. MostCommonDisease
-a. uses CountFunction2 to iterate through the column keeping 
-track of the highestCount
-b.  returning the list of customers
- with the returnCustomer procedure.
-c. Also prints out the disease with its count.
