@@ -14,10 +14,10 @@ Tables: Customer_Info, Customer_address, cardiac patients
   @Disease referes to the column name - Input Variable <br>
   @DiseaseCount - Output variables
 
-  1. countFunction2 @DiseaseInput @DiseaseCount
+  1. countFunction2 @DiseaseInput @DiseaseCount <br>
   Takes the name of the disease as an Input
   and then outputs the count of customers with that disease <br>
-  2. returnCustomer @Disease
+  2. returnCustomer @Disease <br>
   Executes a list of customers with a certain disease <br>
   3. MostCommonDisease <br>
   a. uses CountFunction2 to iterate through the columns keeping 
