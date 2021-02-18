@@ -1,30 +1,25 @@
 # MedicalDataSQL
 Normalized data from an input file that had information about a customers health data resulting in three different tables with relations. <br>
 
-Tables: 
-<br>
-1. Customer_Info (PK:Customer_Id) + customer_info + employment + education + 16 columns of different health constraints
-<br>
-2. Customer_address (PK: Customer_id+ZipCode) Columns: state, city, county, population, area
-<br>
-3. cardiac patients (PK: Columns identity)+ customer_id+ highblood, overwieght, hyperlipidemia, stroke
-<br>
+Tables: <br>
+1. Customer_Info (PK:Customer_Id) + customer_info + employment + education + 16 columns of different health constraints <br>
 
-1. Identified all patients with High Blood pressure or Hyperlipidemia in the Cardiac Patients table 
-<br>
+2. Customer_address (PK: Customer_id+ZipCode) Columns: state, city, county, population, area <br>
+
+3. cardiac patients (PK: Columns identity)+ customer_id+ highblood, overwieght, hyperlipidemia, stroke <br>
+
+#Results: 
+1. Identified all patients with High Blood pressure or Hyperlipidemia in the Cardiac Patients table <br>
 
 2. Generated a list of patients who were found have the most common disease among senior citizens by
- using <b>dynamic queries</b> and <b>stored procedures</b> <b>Folder 9</b> 
-<br>
+ using <b>dynamic queries</b> and <b>stored procedures</b> <b>Folder 9</b> <br>
  
-3. Process was done similarly for female patients for the least common disease <b>Folder 10</b>
-<br>
+3. Process was done similarly for female patients for the least common disease <b>Folder 10</b> <br>
 
-4. Most common disease was found among all patients through similar procedures <b>Folder 11</b>
-<br>
+4. Most common disease was found among all patients through similar procedures <b>Folder 11</b> <br>
+
 5. Generated a list of patients who have anxiety, and are overweight and have Reflux_esophagitis 
-and/or Allergic_rhinitis and/or Asthma. <b>Folder 12</b>
-<br>
+and/or Allergic_rhinitis and/or Asthma. <b>Folder 12</b> <br>
 
 #Stored Procedures <br>
 
